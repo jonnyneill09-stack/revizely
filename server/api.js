@@ -1,5 +1,5 @@
 const crypto = require("node:crypto");
-const {
+const { supabase } = require("./supabase");
   clearSession,
   createSession,
   getSessionUser,
@@ -7,7 +7,7 @@ const {
   normaliseEmail,
   passwordMatches,
   publicUser
-} = require("./auth");
+ = require("./auth");
 const { readJson, sendJson } = require("./http");
 const { competitionClasses, createWorkspace, usersByEmail, usersById, workspaces } = require("./store");
 const { features, plans } = require("./premium");
@@ -19,43 +19,93 @@ async function handleApi(request, response, pathname) {
   }
 
   if (pathname === "/api/auth/signup" && request.method === "POST") {
-    const body = await readJson(request);
-    const name = String(body.name || "").trim();
-    const email = normaliseEmail(body.email);
-    const password = String(body.password || "");
+  const body = await readJson(request);
+  const name = String(body.name || "").trim();
+  const email = normaliseEmail(body.email);
+  const password = String(body.password || "");
 
-    if (!name || !email.includes("@") || password.length < 8) {
-      return sendJson(response, 400, { error: "Enter a name, valid email and password of at least 8 characters." });
-    }
-    if (usersByEmail.has(email)) {
-      return sendJson(response, 409, { error: "An account with this email already exists." });
-    }
-
-    const passwordRecord = hashPassword(password);
-    const user = {
-      id: crypto.randomUUID(),
-      name,
-      email,
-      passwordSalt: passwordRecord.salt,
-      passwordHash: passwordRecord.hash,
-      createdAt: new Date().toISOString()
-    };
-    usersByEmail.set(email, user);
-    usersById.set(user.id, user);
-    workspaces.set(user.id, createWorkspace(user));
-    createSession(user, response);
-    return sendJson(response, 201, { user: publicUser(user) });
+  if (!name || !email.includes("@") || password.length < 8) {
+    return sendJson(response, 400, {
+      error: "Enter a name, valid email and password of at least 8 characters."
+    });
   }
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        name
+      }
+    }
+  });
+
+  if (error) {
+    return sendJson(response, 400, { error: error.message });
+  }
+
+  if (!data.user) {
+    return sendJson(response, 400, { error: "Unable to create account." });
+  }
+
+  const user = {
+    id: data.user.id,
+    name,
+    email,
+    createdAt: new Date().toISOString()
+  };
+
+  const { error: profileError } = await supabase
+    .from("profiles")
+    .upsert({
+      id: data.user.id,
+      name,
+      email
+    });
+
+  if (profileError) {
+    return sendJson(response, 500, { error: profileError.message });
+  }
+
+  return sendJson(response, 201, {
+    user: publicUser(user)
+  });
+}
 
   if (pathname === "/api/auth/login" && request.method === "POST") {
-    const body = await readJson(request);
-    const user = usersByEmail.get(normaliseEmail(body.email));
-    if (!user || !passwordMatches(String(body.password || ""), user)) {
-      return sendJson(response, 401, { error: "Email or password is incorrect." });
-    }
-    createSession(user, response);
-    return sendJson(response, 200, { user: publicUser(user) });
+  const body = await readJson(request);
+  const email = normaliseEmail(body.email);
+  const password = String(body.password || "");
+
+  if (!email || !password) {
+    return sendJson(response, 400, {
+      error: "Email and password are required."
+    });
   }
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error || !data.user) {
+    return sendJson(response, 401, {
+      error: "Email or password is incorrect."
+    });
+  }
+
+  const user = {
+    id: data.user.id,
+    name: data.user.user_metadata?.name || email.split("@")[0],
+    email: data.user.email,
+    createdAt: data.user.created_at
+  };
+
+  return sendJson(response, 200, {
+    user: publicUser(user),
+    session: data.session
+  });
+}
 
   if (pathname === "/api/auth/provider" && request.method === "POST") {
     return sendJson(response, 501, { error: "Social sign-in requires provider credentials and is not configured yet." });
