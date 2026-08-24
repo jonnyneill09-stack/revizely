@@ -1,5 +1,6 @@
 const crypto = require("node:crypto");
 const { supabase } = require("./supabase");
+const {
   clearSession,
   createSession,
   getSessionUser,
@@ -7,7 +8,7 @@ const { supabase } = require("./supabase");
   normaliseEmail,
   passwordMatches,
   publicUser
- = require("./auth");
+} = require("./auth");
 const { readJson, sendJson } = require("./http");
 const { competitionClasses, createWorkspace, usersByEmail, usersById, workspaces } = require("./store");
 const { features, plans } = require("./premium");
