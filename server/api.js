@@ -89,9 +89,9 @@ async function handleApi(request, response, pathname) {
     password
   });
 
-  if (error || !data.user) {
+  if (error || !data.user || !data.session) {
     return sendJson(response, 401, {
-      error: "Email or password is incorrect."
+      error: error?.message || "Email or password is incorrect."
     });
   }
 
@@ -102,11 +102,14 @@ async function handleApi(request, response, pathname) {
     createdAt: data.user.created_at
   };
 
+  createSession(user, response, data.session);
+
   return sendJson(response, 200, {
-    user: publicUser(user),
-    session: data.session
+    user: publicUser(user)
   });
 }
+
+  
 
   if (pathname === "/api/auth/provider" && request.method === "POST") {
     return sendJson(response, 501, { error: "Social sign-in requires provider credentials and is not configured yet." });
@@ -118,11 +121,11 @@ async function handleApi(request, response, pathname) {
   }
 
   if (pathname === "/api/session" && request.method === "GET") {
-    const user = getSessionUser(request);
+    const user = await getSessionUser(request);
     return user ? sendJson(response, 200, { user: publicUser(user) }) : sendJson(response, 401, { error: "Not authenticated." });
   }
 
-  const user = getSessionUser(request);
+  const user = await getSessionUser(request);
   if (!user) return sendJson(response, 401, { error: "Not authenticated." });
 
   if (pathname === "/api/workspace" && request.method === "GET") {
