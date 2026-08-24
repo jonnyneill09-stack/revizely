@@ -53,8 +53,16 @@ form.addEventListener("submit", async (event) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values)
     });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error);
+    const text = await response.text();
+
+let data;
+try {
+  data = text ? JSON.parse(text) : {};
+} catch {
+  throw new Error(`Server returned invalid response: ${text || "empty response"}`);
+}
+
+if (!response.ok) throw new Error(data.error || "Authentication failed.");
     showNote("Opening your workspace...");
     window.location.href = "../app/index.html";
   } catch (error) {
