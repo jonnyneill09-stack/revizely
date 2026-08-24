@@ -20,8 +20,16 @@ document.querySelectorAll("[data-provider]").forEach((button) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ provider: button.dataset.provider })
       });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
+      const text = await response.text();
+
+let data;
+try {
+  data = text ? JSON.parse(text) : {};
+} catch {
+  throw new Error(`Server returned invalid response: ${text || "empty response"}`);
+}
+
+if (!response.ok) throw new Error(data.error || "Signup failed.");
       window.location.href = "../app/index.html";
     } catch (error) {
       showNote(error.message || "Social sign-in is unavailable.");
