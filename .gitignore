@@ -1,2 +1,17 @@
+<<<<<<< HEAD
 node_modules/
 .env.local
+=======
+# Local environment
+.env
+.env.local
+
+# Dependencies and build output
+node_modules/
+
+# Vercel
+.vercel
+
+# macOS
+.DS_Store
+>>>>>>> upstream/main
