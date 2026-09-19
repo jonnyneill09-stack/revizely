@@ -62,8 +62,7 @@ try {
   throw new Error(`Server returned invalid response: ${text || "empty response"}`);
 }
 
-if (!response.ok) throw new Error(data.error || "Authentication failed.");
-    showNote("Opening your workspace...");
+if (!response.ok) throw new Error(data.error || "Authentication failed.");    showNote("Opening your workspace...");
     window.location.href = "../app/index.html";
   } catch (error) {
     showNote(error.message || "Something went wrong. Please try again.");
