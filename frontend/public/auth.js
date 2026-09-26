@@ -39,17 +39,36 @@ form.addEventListener("submit", async (event) => {
 
   setBusy(submit, true);
   try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values)
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error);
-    showNote("Opening your workspace...");
-    window.location.href = "../app/index.html";
-  } catch (error) {
+    try {
+  const response = await fetch(endpoint, {
+    method: "POST",
+    credentials: "same-origin",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values)
+  });
+
+  const text = await response.text();
+
+  let data = {};
+  if (text.trim()) {
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error(
+        `Login server returned an invalid response (${response.status}).`
+      );
+    }
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      data.error || `Login failed (${response.status}).`
+    );
+  }
+
+  showNote("Opening your workspace...");
+  window.location.href = "../app/index.html";
+} catch (error) {
     showNote(error.message || "Something went wrong. Please try again.");
     setBusy(submit, false);
   }
