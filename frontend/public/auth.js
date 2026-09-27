@@ -64,6 +64,11 @@ if (!form) {
 
       if (!response.ok) throw new Error(data.error || `Login failed (${response.status}).`);
 
+      if (data.requiresConfirmation) {
+        showNote(data.message || "Check your email to confirm your account, then log in.");
+        setBusy(submit, false);
+        return;
+      }
       showNote("Opening your workspace...");
       window.location.href = "../app/index.html";
     } catch (error) {
