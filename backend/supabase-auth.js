@@ -18,17 +18,29 @@ async function request(path, options = {}) {
 }
 
 async function login(email, password) {
-  return request("/auth/v1/token?grant_type=password", {
+  const result = await request("/auth/v1/token?grant_type=password", {
     method: "POST",
     body: JSON.stringify({ email, password })
   });
+  if (!result.response.ok) {
+    const error = new Error(result.data?.msg || result.data?.message || result.data?.error_description || "Supabase login failed.");
+    error.status = result.response.status;
+    throw error;
+  }
+  return result.data;
 }
 
 async function signup(email, password, name) {
-  return request("/auth/v1/signup", {
+  const result = await request("/auth/v1/signup", {
     method: "POST",
     body: JSON.stringify({ email, password, data: { name } })
   });
+  if (!result.response.ok) {
+    const error = new Error(result.data?.msg || result.data?.message || result.data?.error_description || "Supabase signup failed.");
+    error.status = result.response.status;
+    throw error;
+  }
+  return result.data;
 }
 
 async function user(token) {
