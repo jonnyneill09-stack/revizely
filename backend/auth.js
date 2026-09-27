@@ -2,6 +2,7 @@ const crypto = require("node:crypto");
 const { sessions, usersById } = require("./store");
 
 const SESSION_COOKIE = "revizely_session";
+// Supabase auth migration in progress.
 // Vercel (and any HTTPS host) should only hand the session cookie back over TLS.
 const SECURE_COOKIE = Boolean(process.env.VERCEL) || process.env.NODE_ENV === "production";
 
