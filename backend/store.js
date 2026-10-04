@@ -44,7 +44,7 @@ function createWorkspace(user) {
   return {
     profile: createProfile(user),
     preferences: {
-      theme: "system",
+      theme: "light",
       aiEnabled: true
     },
     notifications: {

@@ -11,7 +11,7 @@
   <script>
     (function () {
       try {
-        var stored = localStorage.getItem("revizely-theme") || "system";
+        var stored = localStorage.getItem("revizely-theme") || "light";
         var dark = stored === "dark" || (stored === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
         document.documentElement.dataset.theme = dark ? "dark" : "light";
       } catch (error) {

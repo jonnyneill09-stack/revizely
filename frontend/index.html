@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Revizely.ai | Study. Organise. Achieve.</title>
-  <meta name="description" content="Revizely.ai is an all-in-one AI study workspace for notes, flashcards, past papers, progress tracking and focused revision." />
+  <meta name="description" content="Revizely.ai is an all-in-one AI academic workspace for revision tools, AI tutoring, work experience, extracurriculars and progress tracking." />
   <link rel="icon" type="image/svg+xml" href="assets/revizely-logo.svg" />
   <link rel="icon" type="image/png" href="assets/revizely-logo.png" />
   <link rel="apple-touch-icon" href="assets/revizely-logo.png" />
@@ -12,7 +12,7 @@
     // Applied before first paint so a dark-mode visitor never sees a light flash.
     (function () {
       try {
-        var stored = localStorage.getItem("revizely-theme") || "system";
+        var stored = localStorage.getItem("revizely-theme") || "light";
         var dark = stored === "dark" || (stored === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
         document.documentElement.dataset.theme = dark ? "dark" : "light";
       } catch (error) {
@@ -73,7 +73,6 @@
   <main id="top">
     <section class="px-3 pt-24 sm:px-5 lg:px-6">
       <div id="heroStage" class="hero-stage relative mx-auto min-h-[680px] max-w-[1500px] overflow-hidden rounded-[28px] px-5 pb-7 pt-14 sm:px-8 lg:min-h-[660px] lg:px-12">
-        <canvas id="studyScene" class="absolute inset-0 z-0 h-full w-full"></canvas>
         <div id="heroAura" class="pointer-events-none absolute inset-0 z-[1]"></div>
         <div class="hero-ring hero-ring-one"></div>
         <div class="hero-ring hero-ring-two"></div>
@@ -82,8 +81,7 @@
 
         <div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center text-center">
           <div class="reveal inline-flex items-center gap-2 rounded-full border border-white/75 bg-white/60 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur-xl">
-            <svg class="h-4 w-4 text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.7l1.7 5.1h5.4l-4.4 3.1 1.7 5.1-4.4-3.2L5.6 15l1.7-5.1-4.4-3.1h5.4L10 1.7Z"/></svg>
-            All-in-one AI study companion
+            All-in-one AI academic companion
           </div>
 
           <h1 class="reveal mt-6 max-w-5xl text-balance text-5xl font-black leading-[0.98] tracking-[-0.045em] text-slate-950 sm:text-6xl lg:text-7xl">
@@ -92,7 +90,7 @@
           </h1>
 
           <p class="reveal mt-6 max-w-2xl text-pretty text-base font-medium leading-8 text-slate-700 sm:text-lg">
-            Everything you need to revise smarter: exam notes, flashcards, past papers, AI questions and progress tracking in one calm workspace.
+            Everything you need to excel academically: revision tools, AI questions, work experience and extracurriculars, all in one place.
           </p>
 
           <div class="reveal mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -169,33 +167,33 @@
       <div class="reveal mx-auto max-w-3xl text-center">
         <p class="eyebrow">Tools built for students</p>
         <h2 class="mt-3 text-balance text-4xl font-black leading-tight tracking-[-0.035em] text-slate-950 sm:text-5xl">Everything you need, in one place.</h2>
-        <p class="mt-5 text-pretty text-lg leading-8 text-slate-600">The Study-Hub feature set, rebuilt in a cleaner Revizely.ai style for fast revision and calm planning.</p>
+        <p class="mt-5 text-pretty text-lg leading-8 text-slate-600">The all-in-one academic platform built to help you excel in all areas, built by students for students.</p>
       </div>
 
       <div class="feature-grid mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <article class="feature-cell">
-          <span class="feature-icon bg-violet-100 text-violet-600"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h14v16H5z" stroke="currentColor" stroke-width="2"/><path d="M8 9h8M8 13h8M8 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          <h3>Exam Notes</h3>
-          <p>Organised notes by subject and topic, with clear highlights and searchable summaries.</p>
-          <a href="public/signup.html" aria-label="Open Exam Notes"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <span class="feature-icon bg-violet-100 text-violet-600"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M9.2 9.2a2.9 2.9 0 0 1 5.6 1c0 1.9-2.8 2.6-2.8 2.6M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3>Quizzes</h3>
+          <p>Build topic quizzes, test your recall and get an instant score on every attempt.</p>
+          <a href="public/signup.html" aria-label="Open Quizzes"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
         <article class="feature-cell">
-          <span class="feature-icon bg-emerald-100 text-emerald-600"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h13a3 3 0 0 1 3 3v7H7a3 3 0 0 1-3-3V7Z" stroke="currentColor" stroke-width="2"/><path d="M8 11h7M8 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          <h3>Flashcards</h3>
-          <p>Quiz mode, spaced repetition and review queues that keep the right cards in front of you.</p>
-          <a href="public/signup.html" aria-label="Open Flashcards"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <span class="feature-icon bg-indigo-100 text-indigo-600"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 1.6 4.7 5 .1-4 2.9 1.5 4.8-4.1-2.9-4.1 2.9 1.5-4.8-4-2.9 5-.1L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M20 17v3M18.5 18.5h3M4 17v3M2.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <h3>AI Tutor</h3>
+          <p>Ask anything, get clear step-by-step explanations and generate practice questions.</p>
+          <a href="public/signup.html" aria-label="Open AI Tutor"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
         <article class="feature-cell">
-          <span class="feature-icon bg-blue-100 text-blue-600"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13H7V3Z" stroke="currentColor" stroke-width="2"/><path d="M14 3v6h5M10 14h6M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          <h3>Past Papers</h3>
-          <p>Practise with timed papers, marked answers and a tidy record of your strongest topics.</p>
-          <a href="public/signup.html" aria-label="Open Past Papers"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <span class="feature-icon bg-blue-100 text-blue-600"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3 13h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <h3>Work Experience</h3>
+          <p>Organise opportunities, track applications and keep every deadline in view.</p>
+          <a href="public/signup.html" aria-label="Open Work Experience"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
         <article class="feature-cell">
-          <span class="feature-icon bg-pink-100 text-pink-600"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><circle cx="5" cy="6" r="2" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="6" r="2" stroke="currentColor" stroke-width="2"/><circle cx="5" cy="18" r="2" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="18" r="2" stroke="currentColor" stroke-width="2"/><path d="M7 7.4 9.8 10M14.2 10 17 7.4M7 16.6 9.8 14M14.2 14 17 16.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          <h3>Knowledge Organisers</h3>
-          <p>Visual topic sheets and collapsible summaries for quick pre-exam recall.</p>
-          <a href="public/signup.html" aria-label="Open Knowledge Organisers"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <span class="feature-icon bg-pink-100 text-pink-600"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="6" stroke="currentColor" stroke-width="2"/><path d="m8.6 14-1.6 7 5-3 5 3-1.6-7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+          <h3>Extracurriculars</h3>
+          <p>Log clubs, competitions and achievements, ready for your CV and applications.</p>
+          <a href="public/signup.html" aria-label="Open Extracurriculars"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
         <article class="feature-cell">
           <span class="feature-icon bg-amber-100 text-amber-600"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5M4 19h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="m7 15 4-5 4 3 5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -204,10 +202,10 @@
           <a href="public/signup.html" aria-label="Open Progress Tracking"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
         <article class="feature-cell">
-          <span class="feature-icon bg-indigo-100 text-indigo-600"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 1.6 4.7 5 .1-4 2.9 1.5 4.8-4.1-2.9-4.1 2.9 1.5-4.8-4-2.9 5-.1L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M20 17v3M18.5 18.5h3M4 17v3M2.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          <h3>AI Study Assistant</h3>
-          <p>Generate questions, explain tricky topics and turn notes into useful revision tasks.</p>
-          <a href="public/signup.html" aria-label="Open AI Study Assistant"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <span class="feature-icon bg-emerald-100 text-emerald-600"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2"/><rect x="13" y="4" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2"/><rect x="4" y="13" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2"/><path d="M16.5 13.5v6M13.5 16.5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <h3>&amp; More</h3>
+          <p>Notes, flashcards, past papers, study plans, focus mode and more, all in one workspace.</p>
+          <a href="public/signup.html" aria-label="Open More features"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
       </div>
     </section>
@@ -215,8 +213,8 @@
     <section id="get-started" class="mx-auto max-w-7xl px-5 pb-16 sm:px-7 lg:px-8 lg:pb-20">
       <div class="cta-panel reveal flex flex-col gap-8 rounded-[28px] p-8 sm:p-10 lg:flex-row lg:items-center lg:justify-between lg:p-14">
         <div>
-          <p class="eyebrow">Ready to revise better?</p>
-          <h2 class="mt-3 max-w-2xl text-balance text-4xl font-black leading-tight tracking-[-0.035em] text-slate-950 sm:text-5xl">Transform your study habits without adding clutter.</h2>
+          <p class="eyebrow">Ready for academic success?</p>
+          <h2 class="mt-3 max-w-2xl text-balance text-4xl font-black leading-tight tracking-[-0.035em] text-slate-950 sm:text-5xl">Transform your school habits without adding clutter.</h2>
           <p class="mt-4 max-w-xl text-lg leading-8 text-slate-700">Join students who organise work, practise smarter and keep progress visible.</p>
         </div>
         <a href="public/signup.html" class="magnetic-btn group inline-flex min-h-14 shrink-0 items-center justify-center gap-3 rounded-2xl bg-slate-950 px-7 text-base font-bold text-white shadow-xl shadow-slate-950/20 transition hover:bg-slate-800">
@@ -238,7 +236,7 @@
             <small class="brand-slogan">Revise wisely with Revizely</small>
           </span>
         </a>
-        <p class="mt-4 max-w-xs text-sm leading-7 text-slate-500">Your all-in-one study workspace. Built for students, designed for organised success.</p>
+        <p class="mt-4 max-w-xs text-sm leading-7 text-slate-500">Your all-in-one academic workspace. Built for students, designed for organised success.</p>
       </div>
       <div class="footer-col"><h3>Product</h3><a href="features.html">Features</a><a href="public/signup.html">Get Started</a></div>
       <div class="footer-col"><h3>Company</h3><a href="#top">About Us</a><a href="contact.html">Contact</a></div>
@@ -247,7 +245,6 @@
     <div class="mx-auto mt-10 max-w-7xl border-t border-slate-100 pt-6 text-sm font-medium text-slate-400">&copy; 2026 Revizely.ai. All rights reserved.</div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     const header = document.getElementById("siteHeader");
     const menuButton = document.getElementById("menuButton");
@@ -369,145 +366,6 @@
       }, { threshold: 0.4 });
       pathObserver.observe(progressPath);
     }
-
-    function initCanvasFallback(canvas) {
-      const ctx = canvas.getContext("2d");
-      const particles = Array.from({ length: 70 }, () => ({
-        x: Math.random(),
-        y: Math.random(),
-        r: 1 + Math.random() * 2.2,
-        vx: (Math.random() - 0.5) * 0.00025,
-        vy: (Math.random() - 0.5) * 0.00025,
-        hue: [232, 255, 164, 32][Math.floor(Math.random() * 4)],
-        alpha: 0.16 + Math.random() * 0.24
-      }));
-
-      const resize = () => {
-        const rect = canvas.parentElement.getBoundingClientRect();
-        canvas.width = Math.round(rect.width * Math.min(devicePixelRatio, 2));
-        canvas.height = Math.round(rect.height * Math.min(devicePixelRatio, 2));
-        canvas.style.width = `${rect.width}px`;
-        canvas.style.height = `${rect.height}px`;
-        ctx.setTransform(canvas.width / rect.width, 0, 0, canvas.height / rect.height, 0, 0);
-      };
-      resize();
-      window.addEventListener("resize", resize);
-      canvas.dataset.engine = "canvas";
-
-      const draw = () => {
-        const rect = canvas.getBoundingClientRect();
-        ctx.clearRect(0, 0, rect.width, rect.height);
-        particles.forEach((p, index) => {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0 || p.x > 1) p.vx *= -1;
-          if (p.y < 0 || p.y > 1) p.vy *= -1;
-
-          const px = p.x * rect.width;
-          const py = p.y * rect.height;
-          ctx.beginPath();
-          ctx.arc(px, py, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${p.hue}, 80%, 58%, ${p.alpha})`;
-          ctx.fill();
-
-          if (index % 8 === 0) {
-            const next = particles[(index + 9) % particles.length];
-            ctx.beginPath();
-            ctx.moveTo(px, py);
-            ctx.lineTo(next.x * rect.width, next.y * rect.height);
-            ctx.strokeStyle = "rgba(255,255,255,0.12)";
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        });
-        requestAnimationFrame(draw);
-      };
-      draw();
-    }
-
-    function initStudyScene() {
-      const canvas = document.getElementById("studyScene");
-      if (!canvas) return;
-      if (!window.THREE) {
-        initCanvasFallback(canvas);
-        return;
-      }
-      canvas.dataset.engine = "three";
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-      camera.position.set(0, 0, 15);
-
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-      const group = new THREE.Group();
-      scene.add(group);
-
-      const colours = [0x6d7cff, 0x9b7cff, 0x53c7a7, 0xf6a657];
-      const geometry = new THREE.SphereGeometry(0.035, 12, 12);
-      const points = [];
-
-      for (let i = 0; i < 74; i += 1) {
-        const material = new THREE.MeshBasicMaterial({
-          color: colours[i % colours.length],
-          transparent: true,
-          opacity: 0.26 + Math.random() * 0.26
-        });
-        const dot = new THREE.Mesh(geometry, material);
-        dot.position.set((Math.random() - 0.5) * 17, (Math.random() - 0.5) * 9, (Math.random() - 0.5) * 4);
-        dot.userData = {
-          baseX: dot.position.x,
-          baseY: dot.position.y,
-          speed: 0.45 + Math.random() * 0.65,
-          drift: Math.random() * Math.PI * 2
-        };
-        group.add(dot);
-        points.push(dot);
-      }
-
-      const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.16 });
-      const lineGeometry = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(-8, -3.2, -1.5),
-        new THREE.Vector3(-3.5, 1.8, -1),
-        new THREE.Vector3(1.5, -0.4, -1.2),
-        new THREE.Vector3(6.8, 3.1, -1.6)
-      ]);
-      group.add(new THREE.Line(lineGeometry, lineMaterial));
-
-      const resize = () => {
-        const rect = canvas.parentElement.getBoundingClientRect();
-        renderer.setSize(rect.width, rect.height, false);
-        camera.aspect = rect.width / rect.height;
-        camera.updateProjectionMatrix();
-      };
-      resize();
-      window.addEventListener("resize", resize);
-
-      let mouseX = 0;
-      let mouseY = 0;
-      heroStage.addEventListener("mousemove", (event) => {
-        const rect = heroStage.getBoundingClientRect();
-        mouseX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-        mouseY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-      });
-
-      const clock = new THREE.Clock();
-      const animate = () => {
-        const elapsed = clock.getElapsedTime();
-        group.rotation.y += (mouseX * 0.08 - group.rotation.y) * 0.02;
-        group.rotation.x += (-mouseY * 0.05 - group.rotation.x) * 0.02;
-        points.forEach((point) => {
-          point.position.y = point.userData.baseY + Math.sin(elapsed * point.userData.speed + point.userData.drift) * 0.24;
-          point.position.x = point.userData.baseX + Math.cos(elapsed * point.userData.speed * 0.6 + point.userData.drift) * 0.18;
-        });
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
-      };
-      animate();
-    }
-
-    initStudyScene();
   </script>
   <script>
     // Shared theme switch for the public pages. The workspace writes the same

@@ -68,63 +68,63 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --app-ink: #f1f5f9;
-  --app-ink-strong: #f8fafc;
-  --app-body: #cbd5e1;
-  --app-body-soft: #b6c2d4;
-  --app-muted: #94a3b8;
-  --app-faint: #8595ad;
+  --app-ink: #f5f5f5;
+  --app-ink-strong: #fafafa;
+  --app-body: #d4d4d4;
+  --app-body-soft: #c4c4c4;
+  --app-muted: #a3a3a3;
+  --app-faint: #8a8a8a;
 
-  --app-canvas: #0b1020;
-  --app-panel: #151b2e;
-  --app-soft: #1a2237;
-  --app-soft-strong: #202940;
-  --app-soft-tint: #232c45;
-  --app-soft-blue: #1a2237;
+  --app-canvas: #000000;
+  --app-panel: #0e0e0f;
+  --app-soft: #161617;
+  --app-soft-strong: #1c1c1e;
+  --app-soft-tint: #222224;
+  --app-soft-blue: #161617;
 
-  --app-line: #2a3350;
-  --app-line-soft: #313b5c;
-  --app-line-strong: #38436a;
-  --app-line-bold: #46527d;
+  --app-line: #262628;
+  --app-line-soft: #2e2e30;
+  --app-line-strong: #38383b;
+  --app-line-bold: #48484c;
 
   --app-indigo: #818cf8;
   --app-indigo-deep: #a5b4fc;
   --app-indigo-deepest: #c7d2fe;
   --app-indigo-light: #6366f1;
-  --app-indigo-border: #3f4a86;
-  --app-indigo-border-strong: #4a5599;
-  --app-indigo-soft: #222b4d;
-  --app-indigo-tint: #2c3563;
+  --app-indigo-border: #33355a;
+  --app-indigo-border-strong: #3f4277;
+  --app-indigo-soft: #181a2c;
+  --app-indigo-tint: #20223a;
 
-  --app-violet-soft: #2a2350;
-  --app-violet-border: #453a7d;
-  --app-violet-border-strong: #5b4a9e;
-  --app-violet-tint: #201b3d;
+  --app-violet-soft: #1f1a2e;
+  --app-violet-border: #342c4d;
+  --app-violet-border-strong: #463b69;
+  --app-violet-tint: #161320;
   --app-violet-ink: #ddd6fe;
 
-  --app-blue-tint: #17253f;
+  --app-blue-tint: #121a28;
   --app-blue-ink: #60a5fa;
-  --app-emerald-tint: #10291f;
-  --app-emerald-border: #2f6b52;
+  --app-emerald-tint: #0f2219;
+  --app-emerald-border: #2a5c46;
   --app-emerald-ink: #34d399;
-  --app-amber-tint: #2b2412;
+  --app-amber-tint: #261f10;
   --app-amber-border: #6f5a24;
-  --app-pink-tint: #33192a;
+  --app-pink-tint: #2a1521;
   --app-pink-ink: #f472b6;
   --app-rose-ink: #fda4af;
 
   --app-danger: #f87171;
-  --app-danger-soft: #2c1618;
+  --app-danger-soft: #2a1414;
   --app-danger-border: #7f3535;
 
-  --app-invert-bg: #e8edf5;
-  --app-invert-bg-hover: #d3dbe8;
-  --app-invert-fg: #0b1020;
+  --app-invert-bg: #f5f5f5;
+  --app-invert-bg-hover: #d4d4d4;
+  --app-invert-fg: #000000;
 
-  --app-hero-gradient: linear-gradient(128deg, #1e2a4d 0%, #232a52 48%, #2f2455 100%);
-  --app-hero-ink: #eef2ff;
-  --app-tile-gradient: linear-gradient(145deg, #1c2a48, #2a2350);
-  --app-shadow: rgb(0 0 0 / 0.45);
+  --app-hero-gradient: linear-gradient(128deg, #161616 0%, #0e0e0e 48%, #1a1a1a 100%);
+  --app-hero-ink: #fafafa;
+  --app-tile-gradient: linear-gradient(145deg, #121212, #1a1a1a);
+  --app-shadow: rgb(0 0 0 / 0.6);
 }
 
 * {
@@ -451,7 +451,7 @@ button {
 
 .dashboard-hero h1 {
   max-width: 44rem;
-  margin: 0;
+  margin: 1.1rem 0 0;
   color: var(--app-hero-ink);
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 900;
@@ -493,6 +493,55 @@ button {
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.65;
+}
+
+.premium-perks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.premium-perk {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--app-line);
+  border-radius: 14px;
+  background: var(--app-panel);
+  padding: 0.85rem 1rem;
+  color: inherit;
+  text-align: left;
+}
+
+button.premium-perk {
+  cursor: pointer;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+button.premium-perk:hover {
+  border-color: var(--app-indigo-border);
+  transform: translateY(-1px);
+}
+
+.premium-perk .tool-icon {
+  flex: none;
+}
+
+.premium-perk strong {
+  display: block;
+  color: var(--app-ink);
+  font-size: 0.88rem;
+  font-weight: 850;
+}
+
+.premium-perk small {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--app-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.45;
 }
 
 .pricing-grid {
@@ -1466,7 +1515,8 @@ button:disabled {
     min-height: auto;
   }
 
-  .pricing-grid {
+  .pricing-grid,
+  .premium-perks {
     grid-template-columns: 1fr;
   }
 
@@ -1539,20 +1589,20 @@ button:disabled {
  * ======================================================================== */
 
 :root[data-theme="dark"] .sidebar {
-  background: rgb(21 27 46 / 0.97);
+  background: rgb(10 10 10 / 0.97);
 }
 
 :root[data-theme="dark"] .app-header {
-  background: rgb(21 27 46 / 0.88) !important;
-  border-bottom-color: rgb(42 51 80 / 0.9);
+  background: rgb(0 0 0 / 0.88) !important;
+  border-bottom-color: rgb(38 38 40 / 0.9);
 }
 
 :root[data-theme="dark"] .empty-state {
-  background: rgb(21 27 46 / 0.5);
+  background: rgb(14 14 15 / 0.5);
 }
 
 :root[data-theme="dark"] .modal-card {
-  border-color: rgb(42 51 80 / 0.8);
+  border-color: rgb(38 38 40 / 0.8);
 }
 
 :root[data-theme="dark"] .dashboard-hero,
@@ -1562,15 +1612,20 @@ button:disabled {
 
 :root[data-theme="dark"] .dashboard-hero {
   background:
-    radial-gradient(circle at 12% 15%, rgb(255 255 255 / 0.08), transparent 26%),
-    radial-gradient(circle at 86% 48%, rgb(187 138 255 / 0.22), transparent 28%),
+    radial-gradient(circle at 12% 15%, rgb(255 255 255 / 0.06), transparent 26%),
     var(--app-hero-gradient);
+  box-shadow: none;
 }
 
 :root[data-theme="dark"] .focus-wrap {
   background:
     radial-gradient(circle at 50% 30%, rgb(255 255 255 / 0.08), transparent 34%),
     var(--app-tile-gradient);
+}
+
+:root[data-theme="dark"] .premium-hero {
+  border-color: var(--app-line);
+  background: var(--app-hero-gradient);
 }
 
 /* ===========================================================================
@@ -1658,6 +1713,64 @@ button:disabled {
 }
 
 /* ===========================================================================
+ * Phone header
+ * ---------------------------------------------------------------------------
+ * The mobile header holds the menu, brand, streak/XP chips and three buttons,
+ * which is wider than a phone. Lower-priority pieces drop out as the screen
+ * narrows; each one is still reachable from the sidebar, dashboard or Settings.
+ * ======================================================================== */
+
+@media (max-width: 780px) {
+  .app-header {
+    gap: 0.75rem;
+  }
+
+  /* If the chips grow (long streaks, big XP totals) the brand gives way
+     rather than pushing the buttons off-screen. */
+  .mobile-brand {
+    min-width: 0;
+  }
+
+  .mobile-brand .brand-wordmark strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .header-actions {
+    flex: none;
+  }
+}
+
+@media (max-width: 35rem) {
+  .mobile-brand .brand-slogan,
+  .header-actions [data-action="quick-focus"] {
+    display: none;
+  }
+
+  .header-actions,
+  .header-metrics {
+    gap: 0.35rem;
+  }
+
+  .metric-chip {
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+@media (max-width: 27.5rem) {
+  .mobile-brand .brand-wordmark {
+    display: none;
+  }
+}
+
+@media (max-width: 21.25rem) {
+  .header-actions #themeToggle {
+    display: none;
+  }
+}
+
+/* ===========================================================================
  * XP reward popup
  * ======================================================================== */
 
@@ -1718,11 +1831,17 @@ button:disabled {
  * Dashboard streak and XP cards
  * ======================================================================== */
 
+/* The banner, streak/XP row and stats row share the same 0.9rem rhythm as the
+   gap between the streak and XP cards themselves. */
 .streak-grid {
   display: grid;
   gap: 0.9rem;
-  margin-bottom: 1.1rem;
+  margin: 0.9rem 0;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.streak-grid + .stats-grid {
+  margin-top: 0.9rem;
 }
 
 .streak-card {

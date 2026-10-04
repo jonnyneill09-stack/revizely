@@ -82,7 +82,7 @@ function normaliseWorkspace(workspace) {
       ...profile,
       subjects: list(profile.subjects)
     },
-    preferences: { theme: "system", aiEnabled: true, ...(workspace.preferences || {}) },
+    preferences: { theme: "light", aiEnabled: true, ...(workspace.preferences || {}) },
     notifications: { study: true, progress: true, content: true, achievements: true, ...(workspace.notifications || {}) },
     streak: { current: 0, longest: 0, lastActiveDate: null, ...(workspace.streak || {}) },
     xp: { total: 0, ...(workspace.xp || {}), history: list(workspace.xp?.history) },
@@ -599,7 +599,7 @@ function renderDashboard() {
       <p>Keep today focused: complete one priority task, review a small set of cards and record what needs attention next.</p>
       <div class="hero-actions">
         <button class="button" type="button" data-route-button="focus"><i data-lucide="play"></i>Start focus session</button>
-        <button class="button-secondary" type="button" data-action="new-note"><i data-lucide="plus"></i>New note</button>
+        <button class="button-secondary" type="button" data-route-button="premium"><i data-lucide="crown"></i>${state.subscription.status === "active" ? "Premium tools" : "Upgrade to premium"}</button>
       </div>
     </section>
 
@@ -639,6 +639,7 @@ function renderDashboard() {
       ${toolCard("resources", "library", "Resource library", "Keep generated lessons and practice resources.", "green")}
       ${toolCard("tutor", "sparkles", "AI tutor", "Ask for explanations and practice questions.", "pink")}
       ${toolCard("progress", "chart-no-axes-column-increasing", "Progress", "Find strengths and topics needing attention.", "blue")}
+      ${toolCard("planner", "calendar-days", "Study plan", "Schedule revision tasks around your deadlines.", "")}
     </section>
 
     <section class="dashboard-row">
@@ -661,6 +662,11 @@ function renderPremium() {
       <p class="eyebrow">Revizely Premium</p>
       <h1>More support for serious revision.</h1>
       <p>Unlock advanced study tools, deeper performance insight and expanded AI-powered support in the same focused workspace.</p>
+      <div class="premium-perks">
+        <div class="premium-perk"><span class="tool-icon green"><i data-lucide="shield-check"></i></span><span><strong>Ad-free</strong><small>Study in a clean workspace with no adverts.</small></span></div>
+        <button class="premium-perk" type="button" data-route-button="support"><span class="tool-icon blue"><i data-lucide="life-buoy"></i></span><span><strong>Priority support</strong><small>Get faster help from the Revizely team.</small></span></button>
+        <div class="premium-perk"><span class="tool-icon pink"><i data-lucide="rocket"></i></span><span><strong>More features coming</strong><small>New premium tools are on the way.</small></span></div>
+      </div>
     </section>
     <div class="section-head"><h2>Choose your plan</h2><span class="badge">Secure checkout</span></div>
     <section class="pricing-grid">

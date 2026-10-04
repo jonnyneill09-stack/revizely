@@ -12,7 +12,7 @@
     // Applied before first paint so a dark-mode user never sees a light flash.
     (function () {
       try {
-        var stored = localStorage.getItem("revizely-theme") || "system";
+        var stored = localStorage.getItem("revizely-theme") || "light";
         var dark = stored === "dark" || (stored === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
         document.documentElement.dataset.theme = dark ? "dark" : "light";
       } catch (error) {
@@ -47,21 +47,19 @@
 
       <p class="nav-label">Workspace</p>
       <a class="nav-link" href="#dashboard" data-route="dashboard"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
-      <a class="nav-link" href="#notes" data-route="notes"><i data-lucide="notebook-tabs"></i><span>Notes</span></a>
-      <a class="nav-link" href="#flashcards" data-route="flashcards"><i data-lucide="layers-3"></i><span>Flashcards</span></a>
-      <a class="nav-link" href="#papers" data-route="papers"><i data-lucide="file-text"></i><span>Past papers</span></a>
-      <a class="nav-link" href="#resources" data-route="resources"><i data-lucide="library"></i><span>Resource library</span></a>
+      <a class="nav-link" href="#tutor" data-route="tutor"><i data-lucide="sparkles"></i><span>AI tutor</span></a>
+      <a class="nav-link" href="#friends" data-route="friends"><i data-lucide="user-round-plus"></i><span>Friends</span></a>
       <a class="nav-link" href="#homework" data-route="homework"><i data-lucide="calendar-check"></i><span>Homework</span></a>
+      <a class="nav-link" href="#planner" data-route="planner"><i data-lucide="calendar-days"></i><span>Study plan</span></a>
 
       <p class="nav-label nav-label-spaced">Study</p>
       <a class="nav-link" href="#quizzes" data-route="quizzes"><i data-lucide="circle-help"></i><span>Quizzes</span></a>
-      <a class="nav-link" href="#planner" data-route="planner"><i data-lucide="calendar-days"></i><span>Study plan</span></a>
-      <a class="nav-link" href="#tutor" data-route="tutor"><i data-lucide="sparkles"></i><span>AI tutor</span></a>
+      <a class="nav-link" href="#notes" data-route="notes"><i data-lucide="notebook-tabs"></i><span>Notes</span></a>
+      <a class="nav-link" href="#flashcards" data-route="flashcards"><i data-lucide="layers-3"></i><span>Flashcards</span></a>
+      <a class="nav-link" href="#papers" data-route="papers"><i data-lucide="file-text"></i><span>Past papers</span></a>
       <a class="nav-link" href="#focus" data-route="focus"><i data-lucide="timer"></i><span>Focus mode</span></a>
       <a class="nav-link" href="#progress" data-route="progress"><i data-lucide="chart-no-axes-column-increasing"></i><span>Progress</span></a>
-      <a class="nav-link" href="#friends" data-route="friends"><i data-lucide="user-round-plus"></i><span>Friends</span></a>
       <a class="nav-link" href="#challenges" data-route="challenges"><i data-lucide="swords"></i><span>Challenges</span></a>
-      <a class="nav-link" href="#leaderboard" data-route="leaderboard"><i data-lucide="trophy"></i><span>Leaderboard</span></a>
 
       <p class="nav-label nav-label-spaced">Career</p>
       <a class="nav-link" href="#extracurriculars" data-route="extracurriculars"><i data-lucide="drama"></i><span>Extracurriculars</span></a>
