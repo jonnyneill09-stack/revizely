@@ -12,7 +12,7 @@
     // Applied before first paint so a dark-mode visitor never sees a light flash.
     (function () {
       try {
-        var stored = localStorage.getItem("revizely-theme") || "system";
+        var stored = localStorage.getItem("revizely-theme") || "light";
         var dark = stored === "dark" || (stored === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
         document.documentElement.dataset.theme = dark ? "dark" : "light";
       } catch (error) {
@@ -49,8 +49,8 @@
     <section class="auth-stage" aria-labelledby="login-heading">
       <div class="auth-card">
         <p class="eyebrow">Welcome back</p>
-        <h1 id="login-heading" class="auth-heading">Log in to Revizely.ai</h1>
-        <p class="auth-copy">Continue to your notes, flashcards and revision workspace.</p>
+        <h1 id="login-heading" class="auth-heading">Login with Revizely</h1>
+        <p class="auth-copy">Continue to your all-in-one academic solution and study workspace.</p>
 
         <div class="social-grid">
           <button class="social-btn" type="button" data-provider="Google" aria-label="Continue with Google">
