@@ -6,6 +6,9 @@ const {
   hashPassword,
   normaliseEmail,
   passwordMatches,
+  signInWithPassword,
+  signUpWithPassword,
+  ensureLocalUser,
   publicUser,
   rolesFor
 } = require("./auth");
@@ -32,52 +35,44 @@ async function handleApi(request, response, pathname) {
     const name = String(body.name || "").trim();
     const email = normaliseEmail(body.email);
     const password = String(body.password || "");
-
     if (!name || !email.includes("@") || password.length < 8) {
       return sendJson(response, 400, { error: "Enter a name, valid email and password of at least 8 characters." });
     }
-    if (usersByEmail.has(email)) {
-      return sendJson(response, 409, { error: "An account with this email already exists." });
+    try {
+      const result = await signUpWithPassword(email, password, name);
+      const user = result.user ? ensureLocalUser(result.user) : null;
+      if (result.access_token && user) {
+        createSession(user, response, result.access_token);
+        return sendJson(response, 201, { user: publicUser(user) });
+      }
+      return sendJson(response, 201, {
+        user: user ? publicUser(user) : { email, name },
+        requiresConfirmation: true,
+        message: "Check your email to confirm your Revizely account, then log in."
+      });
+    } catch (error) {
+      return sendJson(response, error.status === 422 || error.status === 409 ? 409 : 500, {
+        error: error.message || "Unable to create your account."
+      });
     }
-
-    const passwordRecord = hashPassword(password);
-    let friendCode;
-    do friendCode = crypto.randomBytes(3).toString("hex").toUpperCase(); while (friendCodes.has(friendCode));
-    const user = {
-      id: crypto.randomUUID(),
-      name,
-      email,
-      passwordSalt: passwordRecord.salt,
-      passwordHash: passwordRecord.hash,
-      friendCode,
-      roles: rolesFor(email),
-      friends: [],
-      createdAt: new Date().toISOString()
-    };
-    usersByEmail.set(email, user);
-    usersById.set(user.id, user);
-    friendCodes.set(friendCode, user.id);
-    workspaces.set(user.id, createWorkspace(user));
-    createSession(user, response);
-    return sendJson(response, 201, { user: publicUser(user) });
   }
 
   if (pathname === "/api/auth/login" && request.method === "POST") {
     const body = await readJson(request);
-    const user = usersByEmail.get(normaliseEmail(body.email));
-    if (!user || !passwordMatches(String(body.password || ""), user)) {
+    const email = normaliseEmail(body.email);
+    const password = String(body.password || "");
+    if (!email.includes("@") || !password) {
       return sendJson(response, 401, { error: "Email or password is incorrect." });
     }
-    user.roles = rolesFor(user.email);
-    if (!user.friendCode) {
-      do user.friendCode = crypto.randomBytes(3).toString("hex").toUpperCase(); while (friendCodes.has(user.friendCode));
-      friendCodes.set(user.friendCode, user.id);
+    try {
+      const result = await signInWithPassword(email, password);
+      const user = ensureLocalUser(result.user);
+      createSession(user, response, result.access_token);
+      return sendJson(response, 200, { user: publicUser(user) });
+    } catch {
+      return sendJson(response, 401, { error: "Email or password is incorrect." });
     }
-    if (!Array.isArray(user.friends)) user.friends = [];
-    createSession(user, response);
-    return sendJson(response, 200, { user: publicUser(user) });
   }
-
   if (pathname === "/api/auth/provider" && request.method === "POST") {
     return sendJson(response, 501, { error: "Social sign-in requires provider credentials and is not configured yet." });
   }
@@ -88,11 +83,11 @@ async function handleApi(request, response, pathname) {
   }
 
   if (pathname === "/api/session" && request.method === "GET") {
-    const user = getSessionUser(request);
+    const user = await getSessionUser(request);
     return user ? sendJson(response, 200, { user: publicUser(user) }) : sendJson(response, 401, { error: "Not authenticated." });
   }
 
-  const user = getSessionUser(request);
+  const user = await getSessionUser(request);
   if (!user) return sendJson(response, 401, { error: "Not authenticated." });
 
   if (pathname === "/api/workspace" && request.method === "GET") {
